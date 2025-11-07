@@ -11,6 +11,7 @@ function convertToObject(sourceString) {
 
   const filtered = splited.filter((part) => {
     const str = part.trim();
+
     return str.length > 0 && str.includes(':');
   });
 
@@ -20,7 +21,9 @@ function convertToObject(sourceString) {
     const str = part.trim();
     const keep = str.indexOf(':');
 
-    if (keep === -1) return;
+    if (keep === -1) {
+      return;
+    }
 
     const key = str.slice(0, keep).trim();
     const value = str.slice(keep + 1).trim();
