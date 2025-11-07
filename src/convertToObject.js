@@ -8,24 +8,24 @@
 function convertToObject(sourceString) {
   const trimmed = sourceString.trim();
   const splited = trimmed.split(';');
-  const filtered = splited.filter(
-    (part) => part.length > 0 && part.includes(':'),
-  );
+
+  const filtered = splited.filter((part) => {
+    const str = part.trim();
+    return str.length > 0 && str.includes(':');
+  });
 
   const result = {};
 
   filtered.forEach((part) => {
     const str = part.trim();
-    const index = str.indexOf(':');
+    const keep = str.indexOf(':');
 
-    if (index === -1) {
-      return;
-    }
+    if (keep === -1) return;
 
-    const key = str.slice(0, index).trim();
-    const value = str.slice(index + 1).trim();
+    const key = str.slice(0, keep).trim();
+    const value = str.slice(keep + 1).trim();
 
-    if (key) {
+    if (key && value.length > 0) {
       result[key] = value;
     }
   });
